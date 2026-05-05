@@ -180,4 +180,94 @@ write content as flask
 
 Then select both the file->right click->to zip
 -------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+//sns
+firrst open sns->toppic->statndared->name ->create topic
+create subscription->protocol:emial,endpoint mana email
+next send message lo Edina msg ichi send
 
+s3 to sns
+
+create s3 bucket
+create with name->and create->open properties->in that event notification create->event types->all->ssns topic->choose ours-
+>save->upload a file->the mail will come
+
+sqs
+name->stamdard->create
+sned and recive msgs->write somenting and click send->down poll msgs poll it u get over there
+sns->create subscription->amazons sqs->our sqs
+now s3 -> upload 
+send and messages lo poll msgs our upladed item will come in sqs
+----------------------------------------------------------------------------------------------------------------
+//week-9
+🔹 STEP 1: Launch EC2 Instances
+
+Go to Amazon EC2
+
+👉 Create 2 instances:
+
+Instance 1:
+Name → webserver-1
+
+Run:
+
+sudo yum install httpd -y
+sudo systemctl start httpd
+echo "This is Server 1" | sudo tee /var/www/html/index.html
+Instance 2:
+Name → webserver-2
+
+Run:
+
+sudo yum install httpd -y
+sudo systemctl start httpd
+echo "This is Server 2" | sudo tee /var/www/html/index.html
+🔹 STEP 2: Create Security Group (for Load Balancer)
+
+Go to EC2 → Security Groups
+
+Name → lb-sg
+Add rule:
+HTTP (80) → Anywhere (0.0.0.0/0)
+🔹 STEP 3: Create Load Balancer
+
+Go to Elastic Load Balancer
+
+Click Create Load Balancer
+Choose:
+👉 Application Load Balancer (ALB)
+Configure:
+Name → my-alb
+Scheme → Internet-facing
+IP → IPv4
+🔹 STEP 4: Select Network
+VPC → Default
+Select 2 Availability Zones
+🔹 STEP 5: Attach Security Group
+
+👉 Select:
+
+lb-sg
+🔹 STEP 6: Create Target Group
+Name → web-servers-tg
+Target type → Instance
+Protocol → HTTP
+Port → 80
+
+👉 Register:
+
+webserver-1
+webserver-2
+🔹 STEP 7: Create Load Balancer
+
+👉 Click Create
+
+⏳ Wait 2–3 minutes
+
+🌐 STEP 8: Test Load Balancer
+
+👉 Copy DNS:
+
+my-alb-xxxx.elb.amazonaws.com
+
+👉 Open in browser
